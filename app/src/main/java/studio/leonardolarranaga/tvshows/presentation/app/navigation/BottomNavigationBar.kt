@@ -1,4 +1,4 @@
-package studio.leonardolarranaga.tvshows.presentation.app
+package studio.leonardolarranaga.tvshows.presentation.app.navigation
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
@@ -16,9 +16,6 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.navigation.NavHostController
 import studio.leonardolarranaga.tvshows.R
-import studio.leonardolarranaga.tvshows.presentation.navigation.Favorites
-import studio.leonardolarranaga.tvshows.presentation.navigation.Search
-import studio.leonardolarranaga.tvshows.presentation.navigation.TVShows
 
 data class BottomNavigationItem<T: Any>(val title: String, val route: T, val icon: ImageVector)
 
@@ -53,7 +50,14 @@ fun BottomNavigationBar(
                 selected = selectedItem == item,
                 label = { Text(item.title) },
                 onClick = {
+                    if (selectedItem == item) return@NavigationBarItem
                     selectedItem = item
+                    navigationController.navigate(item.route) {
+                        popUpTo(navigationController.graph.startDestinationId) {
+                            inclusive = false
+                        }
+                        launchSingleTop = true
+                    }
                 },
             )
         }

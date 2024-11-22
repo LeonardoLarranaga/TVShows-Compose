@@ -1,4 +1,4 @@
-package studio.leonardolarranaga.tvshows.presentation.navigation
+package studio.leonardolarranaga.tvshows.presentation.app.navigation
 
 import kotlinx.serialization.Serializable
 
