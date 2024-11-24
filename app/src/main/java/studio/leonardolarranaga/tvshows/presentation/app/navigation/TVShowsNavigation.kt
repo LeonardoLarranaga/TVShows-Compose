@@ -6,6 +6,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
+import studio.leonardolarranaga.tvshows.presentation.screens.FavoritesScreen
 import studio.leonardolarranaga.tvshows.presentation.screens.SearchScreen
 import studio.leonardolarranaga.tvshows.presentation.screens.TVShowsScreen
 
@@ -30,6 +31,10 @@ fun TVShowsNavigation(
 
         composable<Search> {
             SearchScreen()
+        }
+
+        composable<Favorites> {
+            FavoritesScreen()
         }
     }
 }

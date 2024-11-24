@@ -9,7 +9,7 @@ object TVShowsDataSource {
     private val service = TVShowsRetrofitClient.tvShowsAPIService
 
     fun getTVShows(): Flow<TVShowsScreenState> = flow {
-        var state = TVShowsScreenState(isLoading = true)
+        var state = TVShowsScreenState(isLoading = true, errorMessage = null, tvShows = emptyList())
         emit(state)
 
         try {
@@ -21,7 +21,9 @@ object TVShowsDataSource {
             state = state.copy(tvShows = body.take(50))
             emit(state)
         } catch (e: Exception) {
-            emit(state.copy(errorMessage = e.message))
+            Log.e("TVShowsDataSource", e.stackTraceToString())
+            state = state.copy(errorMessage = e.localizedMessage)
+            emit(state)
         } finally {
             emit(state.copy(isLoading = false))
         }
