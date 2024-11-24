@@ -3,6 +3,7 @@ package studio.leonardolarranaga.tvshows.data.api
 import android.util.Log
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import studio.leonardolarranaga.tvshows.presentation.screens.viewModels.SearchScreenState
 import studio.leonardolarranaga.tvshows.presentation.screens.viewModels.TVShowDetailScreenState
 import studio.leonardolarranaga.tvshows.presentation.screens.viewModels.TVShowsScreenState
 
@@ -40,6 +41,28 @@ object TVShowsDataSource {
 
             val body = response.body() ?: throw Exception("No Data Found")
             state = state.copy(tvShow = body)
+            emit(state)
+        } catch (e: Exception) {
+            Log.e("TVShowsDataSource", e.stackTraceToString())
+            state = state.copy(errorMessage = e.localizedMessage)
+            emit(state)
+        } finally {
+            emit(state.copy(isLoading = false))
+        }
+    }
+
+    fun searchTVShowByName(name: String): Flow<SearchScreenState> = flow {
+        var state = SearchScreenState(isLoading = true, errorMessage = null, tvShows = emptyList(), hasSearched = true)
+        emit(state)
+
+        try {
+            val response = service.searchTVShowByName(name)
+            Log.d("TVShowsDataSource", response.toString())
+            if (!response.isSuccessful) throw Exception(response.errorBody().toString())
+
+            val body = response.body() ?: throw Exception("No Data Found")
+            Log.d("TVShowsDataSource", body.toString())
+            state = state.copy(tvShows = body)
             emit(state)
         } catch (e: Exception) {
             Log.e("TVShowsDataSource", e.stackTraceToString())

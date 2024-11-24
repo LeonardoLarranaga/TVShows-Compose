@@ -41,7 +41,7 @@ fun TVShowCard(
     tvShow: TVShow,
     onClick: (Int) -> Unit
 ) {
-    val painter = rememberAsyncImagePainter(tvShow.image.medium)
+    val painter = rememberAsyncImagePainter(tvShow.image?.medium)
 
     Card(
         modifier = modifier

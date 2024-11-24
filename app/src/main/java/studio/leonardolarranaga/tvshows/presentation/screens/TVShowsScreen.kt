@@ -14,15 +14,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import studio.leonardolarranaga.tvshows.data.model.tvShow.TVShow
 import studio.leonardolarranaga.tvshows.presentation.screens.viewModels.TVShowsScreenViewModel
 import studio.leonardolarranaga.tvshows.ui.ErrorMessage
 import studio.leonardolarranaga.tvshows.ui.TVShowCard
 
 @Composable
-fun TVShowsScreen(
-    modifier: Modifier = Modifier,
-    onCardClick: (Int) -> Unit
-) {
+fun TVShowsScreen(onCardClick: (Int) -> Unit) {
     val viewModel: TVShowsScreenViewModel = viewModel()
     val state by viewModel.state.collectAsState()
 
@@ -31,23 +29,35 @@ fun TVShowsScreen(
         onRefresh = viewModel::fetchTVShows
     )
 
-    LazyVerticalGrid(
-        columns = GridCells.Fixed(2),
-        modifier = modifier
-            .fillMaxSize()
-            .padding(12.dp)
-    ) {
-        items(state.tvShows) { tvShow ->
-            TVShowCard(
-                tvShow = tvShow,
-                onClick = onCardClick
-            )
-        }
-    }
+    TVShowsGrid(
+        tvShows = state.tvShows,
+        onCardClick = onCardClick
+    )
 
     if (state.isLoading)
         Box(
             modifier = Modifier.fillMaxSize(),
             contentAlignment = Alignment.Center
         ) { CircularProgressIndicator() }
+}
+
+@Composable
+fun TVShowsGrid(
+    modifier: Modifier = Modifier,
+    tvShows: List<TVShow>,
+    onCardClick: (Int) -> Unit
+) {
+    LazyVerticalGrid(
+        columns = GridCells.Fixed(2),
+        modifier = modifier
+            .fillMaxSize()
+            .padding(12.dp)
+    ) {
+        items(tvShows) { tvShow ->
+            TVShowCard(
+                tvShow = tvShow,
+                onClick = onCardClick
+            )
+        }
+    }
 }

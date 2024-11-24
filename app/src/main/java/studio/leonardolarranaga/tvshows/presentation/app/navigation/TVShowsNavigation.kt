@@ -3,8 +3,8 @@ package studio.leonardolarranaga.tvshows.presentation.app.navigation
 import androidx.compose.animation.AnimatedContentTransitionScope
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.navigation.compose.NavHost
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import studio.leonardolarranaga.tvshows.presentation.screens.FavoritesScreen
 import studio.leonardolarranaga.tvshows.presentation.screens.SearchScreen
@@ -39,7 +39,11 @@ fun TVShowsNavigation(
         }
 
         composable<Search> {
-            SearchScreen()
+            SearchScreen(
+                onCardClick = { tvShowId ->
+                    navigationController.navigate(TVShowDetail(tvShowId))
+                }
+            )
         }
 
         composable<Favorites> {

@@ -4,13 +4,14 @@ package studio.leonardolarranaga.tvshows.data.model.tvShow
 import com.squareup.moshi.Json
 import studio.leonardolarranaga.tvshows.data.model.tvShow.shared.Externals
 import studio.leonardolarranaga.tvshows.data.model.tvShow.shared.Image
+import studio.leonardolarranaga.tvshows.data.model.tvShow.shared.Links
 import studio.leonardolarranaga.tvshows.data.model.tvShow.shared.Network
 import studio.leonardolarranaga.tvshows.data.model.tvShow.shared.Rating
 import studio.leonardolarranaga.tvshows.data.model.tvShow.shared.Schedule
 
 data class TVShow(
     @Json(name = "averageRuntime")
-    val averageRuntime: Int,
+    val averageRuntime: Int?,
     @Json(name = "dvdCountry")
     val dvdCountry: DvdCountry?,
     @Json(name = "ended")
@@ -22,9 +23,9 @@ data class TVShow(
     @Json(name = "id")
     val id: Int,
     @Json(name = "image")
-    val image: Image,
+    val image: Image?,
     @Json(name = "language")
-    val language: String,
+    val language: String?,
     @Json(name = "_links")
     val links: Links,
     @Json(name = "name")
@@ -34,25 +35,25 @@ data class TVShow(
     @Json(name = "officialSite")
     val officialSite: String?,
     @Json(name = "premiered")
-    val premiered: String,
+    val premiered: String?,
     @Json(name = "rating")
     val rating: Rating,
     @Json(name = "runtime")
     val runtime: Int?,
     @Json(name = "schedule")
-    val schedule: Schedule,
+    val schedule: Schedule?,
     @Json(name = "status")
-    val status: String,
+    val status: String?,
     @Json(name = "summary")
-    val summary: String,
+    val summary: String?,
     @Json(name = "type")
-    val type: String,
+    val type: String?,
     @Json(name = "updated")
-    val updated: Int,
+    val updated: Int?,
     @Json(name = "url")
-    val url: String,
+    val url: String?,
     @Json(name = "webChannel")
     val webChannel: WebChannel?,
     @Json(name = "weight")
-    val weight: Int
+    val weight: Int?
 )

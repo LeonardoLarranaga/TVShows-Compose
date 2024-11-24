@@ -9,5 +9,5 @@ data class Externals(
     @Json(name = "thetvdb")
     val thetvdb: Int?,
     @Json(name = "tvrage")
-    val tvrage: Int
+    val tvrage: Int?
 )
