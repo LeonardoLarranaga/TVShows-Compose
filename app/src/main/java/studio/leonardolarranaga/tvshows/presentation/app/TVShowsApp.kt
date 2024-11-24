@@ -20,15 +20,23 @@ import studio.leonardolarranaga.tvshows.presentation.app.navigation.TVShowsNavig
 fun TVShowsApp() {
     val navigationController = rememberNavController()
     var canNavigateBack by remember { mutableStateOf(false) }
+    var topBarTitle by remember { mutableStateOf("TV Shows") }
 
     navigationController.addOnDestinationChangedListener { _, destination, _ ->
-        canNavigateBack = navigationController.previousBackStackEntry != null && !listOf("TVShows", "Favorites", "Search").contains(destination.route.toString().split(".").last())
+        val destinationRoute = destination.route.toString().split(".").last()
+        canNavigateBack = navigationController.previousBackStackEntry != null && !listOf("TVShows", "Favorites", "Search").contains(destinationRoute)
+
+        topBarTitle = if (destinationRoute == "TVShows")
+            "TV Shows"
+        else if (destinationRoute.startsWith("TVShowDetail"))
+            ""
+        else destinationRoute
     }
 
     Scaffold(
         topBar = {
             TopAppBar(
-                title = "TV Shows",
+                title = topBarTitle,
                 canNavigateBack = canNavigateBack,
                 onNavigateBack = { navigationController.popBackStack() }
             )
@@ -49,6 +57,3 @@ fun TVShowsApp() {
         )
     }
 }
-
-
-

@@ -4,7 +4,6 @@ import android.util.Log
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import studio.leonardolarranaga.tvshows.presentation.screens.viewModels.TVShowDetailScreenState
-import studio.leonardolarranaga.tvshows.presentation.screens.viewModels.TVShowDetailScreenViewModel
 import studio.leonardolarranaga.tvshows.presentation.screens.viewModels.TVShowsScreenState
 
 object TVShowsDataSource {

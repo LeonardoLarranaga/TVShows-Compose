@@ -12,7 +12,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Star
+import androidx.compose.material.icons.filled.ThumbUp
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
@@ -102,14 +102,16 @@ fun TVShowCard(
                     horizontalArrangement = Arrangement.spacedBy(8.dp),
                     modifier = modifier.fillMaxWidth(),
                 ) {
+                    val rating = (tvShow.rating.average ?: 0f).toFloat()
+
                     Icon(
-                        imageVector = Icons.Default.Star,
+                        imageVector = Icons.Default.ThumbUp,
                         contentDescription = null,
                         tint = Color.White.copy(alpha = 0.55f)
                     )
 
                     LinearProgressIndicator(
-                        progress = { tvShow.rating.average?.toFloat()?.div(10) ?: 0f },
+                        progress = { rating / 10 },
                         modifier = modifier
                             .clip(RoundedCornerShape(6.dp))
                             .height(5.dp)
@@ -119,7 +121,7 @@ fun TVShowCard(
                     )
 
                     Text(
-                        text = tvShow.rating.average.toString(),
+                        text = rating.toString(),
                         maxLines = 1,
                         color = Color.White.copy(alpha = 0.55f)
                     )
@@ -127,5 +129,4 @@ fun TVShowCard(
             }
         }
     }
-
 }
