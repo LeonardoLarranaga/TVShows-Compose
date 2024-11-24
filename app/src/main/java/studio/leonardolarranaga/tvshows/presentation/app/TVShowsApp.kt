@@ -40,7 +40,7 @@ fun TVShowsApp() {
         TVShowsNavigation(
             modifier = Modifier
                 .padding(
-                    start = innerPadding.calculateStartPadding(LocalLayoutDirection.current) - 8.dp,
+                    start = innerPadding.calculateStartPadding(LocalLayoutDirection.current),
                     top = innerPadding.calculateTopPadding(),
                     end = innerPadding.calculateEndPadding(LocalLayoutDirection.current),
                     bottom = innerPadding.calculateBottomPadding() - 8.dp

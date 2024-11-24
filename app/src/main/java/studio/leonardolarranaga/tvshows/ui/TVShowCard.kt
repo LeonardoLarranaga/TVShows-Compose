@@ -38,7 +38,8 @@ import studio.leonardolarranaga.tvshows.data.model.tvShow.TVShow
 @Composable
 fun TVShowCard(
     modifier: Modifier = Modifier,
-    tvShow: TVShow
+    tvShow: TVShow,
+    onClick: (Int) -> Unit
 ) {
     val painter = rememberAsyncImagePainter(tvShow.image.medium)
 
@@ -46,7 +47,10 @@ fun TVShowCard(
         modifier = modifier
             .padding(8.dp),
         elevation = CardDefaults.cardElevation(6.dp),
-        shape = RoundedCornerShape(16.dp)
+        shape = RoundedCornerShape(16.dp),
+        onClick = {
+            onClick(tvShow.id)
+        }
     ) {
         Box {
             Image(
@@ -105,7 +109,7 @@ fun TVShowCard(
                     )
 
                     LinearProgressIndicator(
-                        progress = { (tvShow.rating.average?.toFloat()?.div(10f)) ?: 0f },
+                        progress = { tvShow.rating.average?.toFloat()?.div(10) ?: 0f },
                         modifier = modifier
                             .clip(RoundedCornerShape(6.dp))
                             .height(5.dp)

@@ -8,6 +8,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import studio.leonardolarranaga.tvshows.presentation.screens.FavoritesScreen
 import studio.leonardolarranaga.tvshows.presentation.screens.SearchScreen
+import studio.leonardolarranaga.tvshows.presentation.screens.TVShowDetailScreen
 import studio.leonardolarranaga.tvshows.presentation.screens.TVShowsScreen
 
 @Composable
@@ -26,7 +27,15 @@ fun TVShowsNavigation(
     ) {
 
         composable<TVShows> {
-            TVShowsScreen()
+            TVShowsScreen(
+                onCardClick = { tvShowId ->
+                    navigationController.navigate(TVShowDetail(tvShowId))
+                }
+            )
+        }
+
+        composable<TVShowDetail> {
+            TVShowDetailScreen()
         }
 
         composable<Search> {

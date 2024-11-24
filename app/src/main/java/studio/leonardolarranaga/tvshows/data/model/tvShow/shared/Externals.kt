@@ -1,4 +1,4 @@
-package studio.leonardolarranaga.tvshows.data.model.tvShow
+package studio.leonardolarranaga.tvshows.data.model.tvShow.shared
 
 
 import com.squareup.moshi.Json

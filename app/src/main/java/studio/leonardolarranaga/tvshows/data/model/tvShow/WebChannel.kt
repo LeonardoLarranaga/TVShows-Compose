@@ -2,6 +2,7 @@ package studio.leonardolarranaga.tvshows.data.model.tvShow
 
 
 import com.squareup.moshi.Json
+import studio.leonardolarranaga.tvshows.data.model.tvShow.shared.Country
 
 data class WebChannel(
     @Json(name = "country")
