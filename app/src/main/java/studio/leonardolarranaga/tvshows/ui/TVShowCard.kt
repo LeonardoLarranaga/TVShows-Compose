@@ -1,22 +1,16 @@
 package studio.leonardolarranaga.tvshows.ui
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ThumbUp
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.Icon
-import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -97,35 +91,7 @@ fun TVShowCard(
 
                 Spacer(modifier.weight(1f))
 
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(8.dp),
-                    modifier = modifier.fillMaxWidth(),
-                ) {
-                    val rating = (tvShow.rating.average ?: 0f).toFloat()
-
-                    Icon(
-                        imageVector = Icons.Default.ThumbUp,
-                        contentDescription = null,
-                        tint = Color.White.copy(alpha = 0.55f)
-                    )
-
-                    LinearProgressIndicator(
-                        progress = { rating / 10 },
-                        modifier = modifier
-                            .clip(RoundedCornerShape(6.dp))
-                            .height(5.dp)
-                            .weight(1f),
-                        color = Color.White.copy(alpha = 0.55f),
-                        trackColor = Color.White.copy(alpha = 0.15f)
-                    )
-
-                    Text(
-                        text = rating.toString(),
-                        maxLines = 1,
-                        color = Color.White.copy(alpha = 0.55f)
-                    )
-                }
+                TVShowRatingBar(tvShow.rating.average)
             }
         }
     }
