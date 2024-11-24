@@ -52,7 +52,7 @@ object TVShowsDataSource {
     }
 
     fun searchTVShowByName(name: String): Flow<SearchScreenState> = flow {
-        var state = SearchScreenState(isLoading = true, errorMessage = null, tvShows = emptyList(), hasSearched = true)
+        var state = SearchScreenState(isLoading = true, errorMessage = null, tvShows = emptyList())
         emit(state)
 
         try {
@@ -69,7 +69,7 @@ object TVShowsDataSource {
             state = state.copy(errorMessage = e.localizedMessage)
             emit(state)
         } finally {
-            emit(state.copy(isLoading = false))
+            emit(state.copy(isLoading = false, hasSearched = true))
         }
     }
 }
