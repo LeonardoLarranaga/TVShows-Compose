@@ -21,8 +21,8 @@ fun TVShowsApp() {
     val navigationController = rememberNavController()
     var canNavigateBack by remember { mutableStateOf(false) }
 
-    navigationController.addOnDestinationChangedListener { _, _, _ ->
-        canNavigateBack = navigationController.previousBackStackEntry != null
+    navigationController.addOnDestinationChangedListener { _, destination, _ ->
+        canNavigateBack = navigationController.previousBackStackEntry != null && !listOf("TVShows", "Favorites", "Search").contains(destination.route.toString().split(".").last())
     }
 
     Scaffold(
