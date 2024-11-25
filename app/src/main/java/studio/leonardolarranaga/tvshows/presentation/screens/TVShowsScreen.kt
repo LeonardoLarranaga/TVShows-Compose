@@ -45,7 +45,9 @@ fun TVShowsScreen(onCardClick: (Int) -> Unit) {
 fun TVShowsGrid(
     modifier: Modifier = Modifier,
     tvShows: List<TVShow>,
-    onCardClick: (Int) -> Unit
+    onCardClick: (Int) -> Unit,
+    isFavorite: Boolean = false,
+    onFavoriteClick: (Int) -> Unit = {}
 ) {
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
@@ -56,7 +58,9 @@ fun TVShowsGrid(
         items(tvShows) { tvShow ->
             TVShowCard(
                 tvShow = tvShow,
-                onClick = onCardClick
+                onClick = onCardClick,
+                isFavorite = isFavorite,
+                onFavoriteClick = onFavoriteClick
             )
         }
     }

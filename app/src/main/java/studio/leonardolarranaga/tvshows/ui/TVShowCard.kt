@@ -9,8 +9,12 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -33,7 +37,9 @@ import studio.leonardolarranaga.tvshows.data.model.tvShow.TVShow
 fun TVShowCard(
     modifier: Modifier = Modifier,
     tvShow: TVShow,
-    onClick: (Int) -> Unit
+    onClick: (Int) -> Unit,
+    isFavorite: Boolean = false,
+    onFavoriteClick: (Int) -> Unit = {}
 ) {
     val painter = rememberAsyncImagePainter(tvShow.image?.medium)
 
@@ -52,7 +58,7 @@ fun TVShowCard(
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
                 modifier = modifier
-                    .height(390.dp)
+                    .height(if (!isFavorite) 390.dp else 410.dp)
                     .blur(64.dp)
             )
 
@@ -92,6 +98,19 @@ fun TVShowCard(
                 Spacer(modifier.weight(1f))
 
                 TVShowRatingBar(tvShow.rating.average)
+
+                Spacer(modifier.weight(1f))
+
+                if (isFavorite)
+                    IconButton(onClick = {
+                        onFavoriteClick(tvShow.id)
+                    }) {
+                        Icon(
+                            imageVector = Icons.Default.Star,
+                            contentDescription = "Unfavorite",
+                            tint = Color.Yellow
+                        )
+                    }
             }
         }
     }

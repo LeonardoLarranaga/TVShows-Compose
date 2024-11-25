@@ -14,7 +14,7 @@ import studio.leonardolarranaga.tvshows.presentation.screens.TVShowsScreen
 @Composable
 fun TVShowsNavigation(
     modifier: Modifier = Modifier,
-    navigationController: NavHostController
+    navigationController: NavHostController,
 ) {
     NavHost(
         modifier = modifier,
@@ -47,7 +47,11 @@ fun TVShowsNavigation(
         }
 
         composable<Favorites> {
-            FavoritesScreen()
+            FavoritesScreen(
+                onCardClick = { tvShowId ->
+                    navigationController.navigate(TVShowDetail(tvShowId))
+                }
+            )
         }
     }
 }

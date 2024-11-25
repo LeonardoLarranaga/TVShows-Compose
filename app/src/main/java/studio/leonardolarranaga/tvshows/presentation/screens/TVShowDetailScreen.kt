@@ -20,6 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.fastJoinToString
 import androidx.lifecycle.viewmodel.compose.viewModel
 import studio.leonardolarranaga.tvshows.data.model.tvShow.embededCast.TVShowWithCast
+import studio.leonardolarranaga.tvshows.presentation.screens.viewModels.TVShowDetailScreenState
 import studio.leonardolarranaga.tvshows.presentation.screens.viewModels.TVShowDetailScreenViewModel
 import studio.leonardolarranaga.tvshows.ui.ErrorMessage
 import studio.leonardolarranaga.tvshows.ui.TVShowRatingBar
@@ -30,7 +31,7 @@ import studio.leonardolarranaga.tvshows.ui.tvShowDetail.TVShowSummaryAndInfo
 
 @Composable
 fun TVShowDetailScreen(modifier: Modifier = Modifier) {
-    val viewModel: TVShowDetailScreenViewModel = viewModel()
+    val viewModel: TVShowDetailScreenViewModel = viewModel(factory = TVShowDetailScreenViewModel.Factory)
     val state by viewModel.state.collectAsState()
 
     ErrorMessage(
@@ -41,7 +42,9 @@ fun TVShowDetailScreen(modifier: Modifier = Modifier) {
     if (state.tvShow != null)
         TVShowDetailContent(
             modifier = modifier,
-            tvShow = state.tvShow!!
+            tvShow = state.tvShow!!,
+            viewModel = viewModel,
+            state = state
         )
 
     if (state.isLoading)
@@ -54,7 +57,9 @@ fun TVShowDetailScreen(modifier: Modifier = Modifier) {
 @Composable
 fun TVShowDetailContent(
     modifier: Modifier = Modifier,
-    tvShow: TVShowWithCast
+    tvShow: TVShowWithCast,
+    viewModel: TVShowDetailScreenViewModel,
+    state: TVShowDetailScreenState
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -83,7 +88,11 @@ fun TVShowDetailContent(
                 rating = tvShow.rating.average,
                 withWeight = false
             )
-            TVShowDetailActions(tvShow = tvShow)
+            TVShowDetailActions(
+                tvShow = tvShow,
+                viewModel = viewModel,
+                state = state
+            )
         }
 
         TVShowSummaryAndInfo(tvShow)
